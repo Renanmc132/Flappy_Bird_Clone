@@ -1,20 +1,22 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameControll : MonoBehaviour
 {
 
-    public GameObject scenario;
-    public GameObject scenarioContinuation;
+    public TextMeshProUGUI scoreText;
+    public int score = 0;
+
+    private void Awake()
+    {
+
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            scenario.transform.localPosition += new Vector3(scenarioContinuation.transform.position.x + 65,0,0);
-        }
+        scoreText.text = "aobra: "+score;
     }
-
-
 
 }
