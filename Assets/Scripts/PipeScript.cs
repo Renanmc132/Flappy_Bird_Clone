@@ -2,7 +2,15 @@ using UnityEngine;
 
 public class PipeScript : MonoBehaviour
 {
+    private AudioSource pointAudio;
+    void Start()
+    {
+        pointAudio = gameObject.AddComponent<AudioSource>();
 
+        
+
+        
+    }
     private Transform player;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -11,6 +19,12 @@ public class PipeScript : MonoBehaviour
         {
             GameControll.score++;
             player = collision.transform;
+            AudioClip clip = Resources.Load<AudioClip>("Audios/point");
+            if (clip != null)
+            {
+                pointAudio.clip = clip;
+                pointAudio.Play();
+            }
         }
     }
 

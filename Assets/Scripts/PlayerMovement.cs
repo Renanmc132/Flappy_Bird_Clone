@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _anim;
 
+    public AudioSource flappyAudio;
+
     private float jumpHeight = 10f;
     private float rotationSpeed = -90f;
     private float jumpRotation = 48f;
@@ -24,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        
-
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             Jump();
@@ -39,10 +39,19 @@ public class PlayerMovement : MonoBehaviour
         _rb.linearVelocity = new Vector2(moveSpeed, _rb.linearVelocity.y);
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            Die();
+        }
+    }
+
+
 
     private void Jump()
     {
+        flappyAudio.Play();
         transform.localRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, jumpRotation);
         _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, jumpHeight);
     }
@@ -50,11 +59,16 @@ public class PlayerMovement : MonoBehaviour
     private void Gravity()
     { 
         float gravityForce = gravity * gravityAcceleration * Time.fixedDeltaTime;
-
-
         _rb.linearVelocity -= new Vector2(0, gravityForce);
+    }
+
+    private void Die()
+    {
+
+
 
     }
+
 
 
 }
