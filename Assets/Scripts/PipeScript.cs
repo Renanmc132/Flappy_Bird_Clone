@@ -3,13 +3,9 @@ using UnityEngine;
 public class PipeScript : MonoBehaviour
 {
 
-    private GameControll game;
+    public GameControll game;
 
 
-    private void Awake()
-    {
-        game = GetComponent<GameControll>();
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
