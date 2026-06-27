@@ -19,7 +19,7 @@ public class GameControll : MonoBehaviour
 
     private void Update()
     {
-        scoreText.text = "aobra: "+score;
+        scoreText.text = ""+score;
         
         timer -= Time.deltaTime;
         if(timer <= 0)
