@@ -1,4 +1,6 @@
+using System;
 using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -7,25 +9,33 @@ public class GameControll : MonoBehaviour
 {
 
     public TextMeshProUGUI scoreText;
-    public int score = 0;
+    public static int score = 0;
 
     public GameObject pipeObject;
-    private float timer;
-    private float timeToSpawn = 3f;
+    private float timer = 0;
+    private float timeToSpawn = 5f;
+    private float pipeDistance = 1;
 
-    private void Awake()
-    {
-
-    }
 
     private void Update()
     {
         scoreText.text = "aobra: "+score;
+        
+        timer -= Time.deltaTime;
+        if(timer <= 0)
+        {
+            SpawnPipe();
+            timer = timeToSpawn;
+            pipeDistance++;
+        }
+
     }
 
     private void SpawnPipe()
     {
-        Instantiate(pipeObject, transform.position, transform.rotation);
+        float Xpos = 30;
+        float Ypos = UnityEngine.Random.Range(10,-3);
+        Instantiate(pipeObject, new Vector2(Xpos * pipeDistance, Ypos), transform.rotation);
     }
 
 }
