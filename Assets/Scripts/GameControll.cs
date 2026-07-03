@@ -8,9 +8,17 @@ using UnityEngine.SocialPlatforms.Impl;
 public class GameControll : MonoBehaviour
 {
 
+    [Header("Background")]
+    public Transform cameraReference;
+    public Transform firstGameScenario;
+    public Transform secondGameScenario;
+    private int distance = 65;
+
+    [Header("Score")]
     public TextMeshProUGUI scoreText;
     public static int score = 0;
 
+    [Header("Pipes")]
     public GameObject pipeObject;
     private float timer = 0;
     private float timeToSpawn = 5f;
@@ -20,7 +28,6 @@ public class GameControll : MonoBehaviour
     private void Update()
     {
         scoreText.text = ""+score;
-        
         timer -= Time.deltaTime;
         if(timer <= 0)
         {
@@ -28,6 +35,8 @@ public class GameControll : MonoBehaviour
             timer = timeToSpawn;
             pipeDistance++;
         }
+
+        
 
     }
 
@@ -37,5 +46,22 @@ public class GameControll : MonoBehaviour
         float Ypos = UnityEngine.Random.Range(10,-3);
         Instantiate(pipeObject, new Vector2(Xpos * pipeDistance, Ypos), transform.rotation);
     }
+
+    private void InfiniteBackground()
+    {
+        if (cameraReference.position.x > (firstGameScenario.position.x + distance))
+        {
+            firstGameScenario.localPosition = new Vector3(firstGameScenario.position.x + distance * 2, 0, 0);
+        }
+
+        if (cameraReference.position.x > (secondGameScenario.position.x + distance))
+        {
+            secondGameScenario.localPosition = new Vector3(secondGameScenario.position.x + distance * 2, 0, 0);
+        }
+    }
+
+
+
+
 
 }
