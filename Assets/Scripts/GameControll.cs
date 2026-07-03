@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class GameControll : MonoBehaviour
 {
@@ -15,8 +16,11 @@ public class GameControll : MonoBehaviour
     private int distance = 65;
 
     [Header("Score")]
-    public TextMeshProUGUI scoreText;
+    public Image scoreUnity;
+    public Image scoreDozen;
+    public Image scoreHundreds;
     public static int score = 0;
+    public Sprite[] numbers;
 
     [Header("Pipes")]
     public GameObject pipeObject;
@@ -24,10 +28,11 @@ public class GameControll : MonoBehaviour
     private float timeToSpawn = 5f;
     private float pipeDistance = 1;
 
-
     private void Update()
     {
-        scoreText.text = ""+score;
+
+        ScoreLogic();
+
         timer -= Time.deltaTime;
         if(timer <= 0)
         {
@@ -37,6 +42,9 @@ public class GameControll : MonoBehaviour
         }
 
         InfiniteBackground();
+
+        if (Input.GetKey(KeyCode.UpArrow))
+            score++;
 
     }
 
@@ -60,7 +68,34 @@ public class GameControll : MonoBehaviour
         }
     }
 
+    private void ScoreLogic()
+    {
+        if (score < 9)
+        {
+            scoreUnity.transform.localPosition = new Vector3(0, 390, 0);
+            scoreDozen.transform.localPosition = new Vector3(0, 390, 0);
+            scoreDozen.enabled = false;
+            scoreHundreds.transform.localPosition = new Vector3(0, 390, 0);
+            scoreHundreds.enabled = false;
+        }
+        else if (score > 9 && score < 100)
+        {
+            scoreDozen.enabled = true;
+            scoreDozen.transform.localPosition = new Vector3(-52, 390, 0);
+            scoreUnity.transform.localPosition = new Vector3(52, 390, 0);
+        }
+        else if (score > 99)
+        {
+            scoreDozen.transform.localPosition = new Vector3(0, 390, 0);
+            scoreUnity.transform.localPosition = new Vector3(105, 390, 0);
+            scoreHundreds.transform.localPosition = new Vector3(-105, 390, 0);
+            scoreHundreds.enabled = true;
+        }
 
+        scoreUnity.sprite = numbers[(score % 10)];
+        scoreDozen.sprite = numbers[(score / 10) % 10];
+        scoreHundreds.sprite = numbers[(score / 100)];
+    }
 
 
 
