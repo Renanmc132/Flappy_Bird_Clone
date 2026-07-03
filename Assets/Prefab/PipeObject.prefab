@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2316910520399806312}
   m_Layer: 0
   m_Name: PipeObject
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,8 +93,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475eda424c1cf254b91d802b1d8f996d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PipeScript
-  game: {fileID: 0}
-  cameraPos: {fileID: 0}
 --- !u!1 &6080783195837191084
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +106,7 @@ GameObject:
   - component: {fileID: 6701359211893757109}
   m_Layer: 0
   m_Name: downPipe
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,7 +244,7 @@ GameObject:
   - component: {fileID: 4739198172129529760}
   m_Layer: 0
   m_Name: upPipe
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

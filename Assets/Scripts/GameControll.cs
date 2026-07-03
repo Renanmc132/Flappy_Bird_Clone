@@ -36,7 +36,7 @@ public class GameControll : MonoBehaviour
             pipeDistance++;
         }
 
-        
+        InfiniteBackground();
 
     }
 

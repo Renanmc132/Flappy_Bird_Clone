@@ -313,6 +313,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 6080783195837191084, guid: e938b2cf885e69645b76c070955461c8, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 9035242990988344557, guid: e938b2cf885e69645b76c070955461c8, type: 3}
       propertyPath: m_Size.x
       value: 0.15761185
@@ -320,6 +324,10 @@ PrefabInstance:
     - target: {fileID: 9035242990988344557, guid: e938b2cf885e69645b76c070955461c8, type: 3}
       propertyPath: m_Offset.x
       value: 0.64066505
+      objectReference: {fileID: 0}
+    - target: {fileID: 9123607741915980431, guid: e938b2cf885e69645b76c070955461c8, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1020,7 +1028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 01234
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b22979230fcac104295fcb8ef4018b99, type: 2}
   m_sharedMaterial: {fileID: -8465562135937548819, guid: b22979230fcac104295fcb8ef4018b99, type: 2}
@@ -1331,7 +1339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98635a266ff74634d82c28778fe26e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  _cinemachineCamera: {fileID: 825742240}
   flappyAudio: {fileID: 1068088849}
+  hitAudio: {fileID: 1068088850}
 --- !u!95 &1068088848
 Animator:
   serializedVersion: 7
@@ -1462,8 +1472,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: 272b0f56de68d784fbdddfa6353e540e, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
