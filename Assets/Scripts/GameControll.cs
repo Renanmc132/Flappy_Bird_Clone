@@ -28,10 +28,12 @@ public class GameControll : MonoBehaviour
     private float timeToSpawn = 5f;
     private float pipeDistance = 1;
 
+    [Header("Start")]
+    public Image startPage;
+    public static bool isPlaying = false;
+
     private void Update()
     {
-
-        ScoreLogic();
 
         timer -= Time.deltaTime;
         if(timer <= 0)
@@ -41,11 +43,16 @@ public class GameControll : MonoBehaviour
             pipeDistance++;
         }
 
+        if(!isPlaying && Input.GetMouseButtonDown(0))
+        {
+            startPage.enabled = false;
+               isPlaying = true;
+        }
+
+
+
         InfiniteBackground();
-
-        if (Input.GetKey(KeyCode.UpArrow))
-            score++;
-
+        ScoreLogic();
     }
 
     private void SpawnPipe()
@@ -70,31 +77,43 @@ public class GameControll : MonoBehaviour
 
     private void ScoreLogic()
     {
-        if (score < 9)
-        {
-            scoreUnity.transform.localPosition = new Vector3(0, 390, 0);
-            scoreDozen.transform.localPosition = new Vector3(0, 390, 0);
-            scoreDozen.enabled = false;
-            scoreHundreds.transform.localPosition = new Vector3(0, 390, 0);
-            scoreHundreds.enabled = false;
-        }
-        else if (score > 9 && score < 100)
-        {
-            scoreDozen.enabled = true;
-            scoreDozen.transform.localPosition = new Vector3(-52, 390, 0);
-            scoreUnity.transform.localPosition = new Vector3(52, 390, 0);
-        }
-        else if (score > 99)
-        {
-            scoreDozen.transform.localPosition = new Vector3(0, 390, 0);
-            scoreUnity.transform.localPosition = new Vector3(105, 390, 0);
-            scoreHundreds.transform.localPosition = new Vector3(-105, 390, 0);
-            scoreHundreds.enabled = true;
-        }
+        if (Input.GetKey(KeyCode.UpArrow))
+            score++;
+        if (isPlaying)
+            {
+                if (score < 9)
+                {
+                    scoreUnity.enabled = true;
+                    scoreUnity.transform.localPosition = new Vector3(0, 390, 0);
+                    scoreDozen.transform.localPosition = new Vector3(0, 390, 0);
+                    scoreDozen.enabled = false;
+                    scoreHundreds.transform.localPosition = new Vector3(0, 390, 0);
+                    scoreHundreds.enabled = false;
+                }
+                else if (score > 9 && score < 100)
+                {
+                    scoreDozen.enabled = true;
+                    scoreDozen.transform.localPosition = new Vector3(-52, 390, 0);
+                    scoreUnity.transform.localPosition = new Vector3(52, 390, 0);
+                }
+                else if (score > 99)
+                {
+                    scoreDozen.transform.localPosition = new Vector3(0, 390, 0);
+                    scoreUnity.transform.localPosition = new Vector3(105, 390, 0);
+                    scoreHundreds.transform.localPosition = new Vector3(-105, 390, 0);
+                    scoreHundreds.enabled = true;
+                }
 
-        scoreUnity.sprite = numbers[(score % 10)];
-        scoreDozen.sprite = numbers[(score / 10) % 10];
-        scoreHundreds.sprite = numbers[(score / 100)];
+                scoreUnity.sprite = numbers[(score % 10)];
+                scoreDozen.sprite = numbers[(score / 10) % 10];
+                scoreHundreds.sprite = numbers[(score / 100)];
+        }
+        else
+        {
+            scoreHundreds.enabled = false;
+            scoreDozen.enabled = false;
+            scoreUnity.enabled = false;
+        }
     }
 
 

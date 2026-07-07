@@ -37,19 +37,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!isDead)
+        if (!isDead && GameControll.isPlaying)
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 Jump();
             }
         }
+
+        if (!GameControll.isPlaying)
+        {_anim.speed = 0;}
+        else
+        {_anim.speed = 1;}
     }
 
     private void FixedUpdate()
     {
-        Gravity();
-        if (!isDead)
+        if(GameControll.isPlaying) 
+            Gravity();
+        if (!isDead && GameControll.isPlaying)
         {
             transform.localRotation *= Quaternion.Euler(transform.rotation.x, transform.rotation.y, rotationSpeed * Time.fixedDeltaTime);
             _rb.linearVelocity = new Vector2(moveSpeed, _rb.linearVelocity.y);
