@@ -21,13 +21,16 @@ public class GameControll : MonoBehaviour
     public Image scoreHundreds;
     public static int score = 0;
     public Sprite[] numbers;
+    private float scoreGoal = 10;
+    private float scoreMultiplier = 1;
 
     [Header("Pipes")]
     public GameObject pipeObject;
-    private float timer = 0;
-    private float timeToSpawn = 5f;
-    private float pipeDistance = 1;
+    private float timer = 2f;
+    private float timeToSpawn = 2f;
+    private float pipeDistance = 3f;
     public Transform player;
+    private float xPos = 10;
 
     [Header("Start")]
     public Image startPage;
@@ -67,16 +70,14 @@ public class GameControll : MonoBehaviour
 
 
 
-
         InfiniteBackground();
         ScoreLogic();
     }
 
     private void SpawnPipe()
     {
-        float Xpos = 20;
         float Ypos = UnityEngine.Random.Range(10,-3);
-        Instantiate(pipeObject, new Vector2(player.position.x + (Xpos * pipeDistance), Ypos), transform.rotation);
+        Instantiate(pipeObject, new Vector2(player.position.x +(xPos * pipeDistance), Ypos), transform.rotation);
     }
 
     private void InfiniteBackground()
@@ -133,6 +134,18 @@ public class GameControll : MonoBehaviour
         }
     }
 
+    private void Difficulty()
+    {
+        if (score > scoreGoal * scoreMultiplier)
+        {
+            if(xPos >= 10)
+            {
+                xPos -= ((scoreGoal * scoreMultiplier) / 2) / 10;
+            }
+            Debug.Log($"Score goal: {scoreGoal * scoreMultiplier}Xpso: {xPos} pipe: {pipeDistance}");
+            scoreMultiplier += 1;
+        }
+    }
 
 
 }

@@ -13,7 +13,7 @@ public class PipeScript : MonoBehaviour
     }
     private Transform player;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
