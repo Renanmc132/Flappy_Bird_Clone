@@ -53,13 +53,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isDead)
+        {
+            _rb.linearVelocity = new Vector2(moveSpeed, _rb.linearVelocity.y);
+        }
+
         if(GameControll.isPlaying) 
             Gravity();
         if (!isDead && GameControll.isPlaying)
         {
             transform.localRotation *= Quaternion.Euler(transform.rotation.x, transform.rotation.y, rotationSpeed * Time.fixedDeltaTime);
-            _rb.linearVelocity = new Vector2(moveSpeed, _rb.linearVelocity.y);
         }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

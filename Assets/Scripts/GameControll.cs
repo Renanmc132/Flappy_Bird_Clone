@@ -27,27 +27,44 @@ public class GameControll : MonoBehaviour
     private float timer = 0;
     private float timeToSpawn = 5f;
     private float pipeDistance = 1;
+    public Transform player;
 
     [Header("Start")]
     public Image startPage;
+    public Image tapButton;
+    private float tapTimer = 0f;
+    private float tapTimeToDisapear = .5f;
     public static bool isPlaying = false;
 
     private void Update()
     {
-
-        timer -= Time.deltaTime;
-        if(timer <= 0)
+        if (isPlaying)
         {
-            SpawnPipe();
-            timer = timeToSpawn;
-            pipeDistance++;
+            timer -= Time.deltaTime;
+            if(timer <= 0)
+            {
+                SpawnPipe();
+                timer = timeToSpawn;
+                pipeDistance++;
+            }
+        }
+        else
+        {
+            tapTimer -= Time.deltaTime;
+            if(tapTimer <= 0)
+            {
+                tapButton.enabled = !tapButton.enabled;
+                tapTimer = tapTimeToDisapear;
+            }
         }
 
         if(!isPlaying && Input.GetMouseButtonDown(0))
         {
             startPage.enabled = false;
-               isPlaying = true;
+            tapButton.enabled = false;
+            isPlaying = true;
         }
+
 
 
 
@@ -57,9 +74,9 @@ public class GameControll : MonoBehaviour
 
     private void SpawnPipe()
     {
-        float Xpos = 30;
+        float Xpos = 20;
         float Ypos = UnityEngine.Random.Range(10,-3);
-        Instantiate(pipeObject, new Vector2(Xpos * pipeDistance, Ypos), transform.rotation);
+        Instantiate(pipeObject, new Vector2(player.position.x + (Xpos * pipeDistance), Ypos), transform.rotation);
     }
 
     private void InfiniteBackground()
